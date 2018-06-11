@@ -34,7 +34,7 @@ const getSuggestions = (value, records) => {
 // This is how we determine what to populate the input field with when a suggestion is clicked.
 const getSuggestionValue = (suggestion) => {
   // console.log(suggestion);
-  return suggestion.formula
+  return suggestion.formula;
 };
 
 class Query extends Component {
@@ -69,10 +69,12 @@ class Query extends Component {
 
   // If we select add new, return the current formula input.
   // Else, the value will be the formula for the molecule that was selected.
-  getSuggestionValue = suggestion => {
+  getSuggestionValue = (suggestion) => {
     if (suggestion.isAddNew) {
       return this.state.formula;
     }
+
+    console.log(suggestion.formula);
 
     return suggestion.formula;
   };
@@ -100,7 +102,8 @@ class Query extends Component {
       this.setState({ records: mergedRecords, formulas: mergedFormulas, loading: false });
       this.onSuggestionsFetchRequested({ value: this.state.formula })
     } else {
-      this.setState({ formula: suggestion });
+      const { formula } = suggestion;
+      this.setState({ formula });
     }
   };
 
